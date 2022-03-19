@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 			writeFile.open("domains_result", std::ios::out | std::ios::trunc);
 			while(std::getline(file, subdomain))
 			{
-				int sys_ret = system(("ping -c1 -s1 " + subdomain + "  > /dev/null 2>&1").c_str());
+				int sys_ret = system(("ping -w1 -c1 -s1 " + subdomain + "  > /dev/null 2>&1").c_str());
 				if (sys_ret == 0)
 				{    
 					writeFile << subdomain << std::endl;
