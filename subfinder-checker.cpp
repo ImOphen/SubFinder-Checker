@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
 			while(std::getline(file, subdomain))
 			{
 				int sys_ret = system(("ping -c1 -s1 " + subdomain + "  > /dev/null 2>&1").c_str());
-
 				if (sys_ret == 0)
 				{    
 					writeFile << subdomain << std::endl;
