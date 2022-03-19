@@ -1,5 +1,11 @@
 # Subdomain-Finder-Checker
 
+
+### Prerequisites
+
+subfinder
+------------------
+
 This is a tool i made using C++, for learning purposes only, it relies on the **subfinder** tool to get a list of subdomains, and tries to ping them one by one, you will find the working subdomains in a file named **domains_result**
 
 ``usage :``
