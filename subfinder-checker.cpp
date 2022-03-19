@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 			std::cout << "Error" << std::endl;
 			return 1;
 		}
-		system(("subfinder -d " + domain +  " > .tmp_domains").c_str());
+		system(("subfinder -silent -d " + domain +  " > .tmp_domains").c_str());
 		file.open(".tmp_domains", std::ios::in);
 		if (file.is_open())
 		{
