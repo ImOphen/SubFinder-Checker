@@ -3,7 +3,9 @@
 
 ### Prerequisites
   subfinder
+  
   bash
+  
   python3
   
 ------------------
