@@ -2,9 +2,11 @@
 
 
 ### Prerequisites
-  subfinder  
-  bash  
-  python3
+  subfinder -> you can install it on Kali linux with : 
+  ```
+    sudo apt update
+    sudo apt install subfinder
+   ```
   
 ------------------
 
