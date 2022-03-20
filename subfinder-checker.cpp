@@ -48,12 +48,12 @@ void help_command(char *argv[])
 			std::cout << "	-t seconds :" << std::endl;
 			std::cout << "		Specify a timeout for the checks | Default : 5" << std::endl;
 			std::cout << "	-h:" << std::endl;
-			std::cout << "		Display this help message" << std::endl << std::endl;
+			std::cout << "		Display this help message" << std::endl;
 			std::cout << "	-s:" << std::endl;
-			std::cout << "		Silent : doenst display the header message" << std::endl << std::endl;
+			std::cout << "		Silent : doenst display the header message" << std::endl;
 			std::cout << "	-ss:" << std::endl;
 			std::cout << "		Super Silent : doenst display the header message" << std::endl;
-			std::cout << "			and the output" << std::endl << std::endl;
+			std::cout << "		and the output" << std::endl << std::endl;
 			exit(0);
 		}
 		i++;	
