@@ -49,14 +49,24 @@ void help_command(char *argv[])
 			std::cout << "		Specify a timeout for the checks | Default : 5" << std::endl;
 			std::cout << "	-h:" << std::endl;
 			std::cout << "		Display this help message" << std::endl << std::endl;
+			std::cout << "	-s:" << std::endl;
+			std::cout << "		Silent : doenst display the header message" << std::endl << std::endl;
 			exit(0);
 		}
 		i++;	
 	}
 }
 
-void header(void)
+void header(char *argv[])
 {
+	int i = 0;
+	while (argv[i])
+	{
+		std::string argvi = argv[i];
+		if (argvi == "-s")
+			return;
+		i++;
+	}
 	std::cout << YELLOW << " ___  __  __  ____      ____  ____  _  _  ____  ____  ____     ___  _   _  ____  ___  _  _  ____  ____ " << std::endl;
 	std::cout << YELLOW <<  "/ __)(  )(  )(  _ \\ ___( ___)(_  _)( \\( )(  _ \\( ___)(  _ \\   / __)( )_( )( ___)/ __)( )/ )( ___)(  _ \\" << std::endl;
 	std::cout << YELLOW << "\\__ \\ )(__)(  ) _ <(___))__)  _)(_  )  (  )(_) ))__)  )   /  ( (__  ) _ (  )__)( (__  )  (  )__)  )   /" << std::endl;
@@ -67,18 +77,19 @@ void header(void)
 std::string RandomString(int len)
 {
 	srand(time(0));
-   std::string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-   std::string newstr;
-   int pos;
-   while(newstr.size() != len) {
-    pos = ((rand() % (str.size() - 1)));
-    newstr += str.substr(pos,1);
-   }
-   return newstr;
+	std::string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	std::string newstr;
+	int pos;
+	while(newstr.size() != len)
+	{
+		pos = ((rand() % (str.size() - 1)));
+		newstr += str.substr(pos,1);
+	}
+	return newstr;
 }
 int main(int argc, char *argv[])
 {
-	header();
+	header(argv);
 	help_command(argv);
 	std::fstream file;
 	if (argc >= 2)
