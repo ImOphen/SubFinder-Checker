@@ -63,6 +63,19 @@ void header(void)
 	std::cout << YELLOW << "(___/(______)(____/    (__)  (____)(_)\\_)(____/(____)(_)\\_)   \\___)(_) (_)(____)\\___)(_)\\_)(____)(_)\\_)" << std::endl;
 	std::cout << std::endl << BLUE << "-   Made by Ophen :D    <|>   use -h to display the Help Message" << std::endl << std::endl << RESET;
 }
+
+std::string RandomString(int len)
+{
+	srand(time(0));
+   std::string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+   std::string newstr;
+   int pos;
+   while(newstr.size() != len) {
+    pos = ((rand() % (str.size() - 1)));
+    newstr += str.substr(pos,1);
+   }
+   return newstr;
+}
 int main(int argc, char *argv[])
 {
 	header();
@@ -72,31 +85,38 @@ int main(int argc, char *argv[])
 	{
 		int timeout_time = timeout_define(argv);
 		std::string domain = domain_define(argv);
+		std::string tmpfile = "." + RandomString(10);
 		if (domain == "NULL" || domain.find(".") == std::string::npos)
 		{	
 			std::cout << RED << "Error: NO DOMAIN" << std::endl;
 			return 1;
 		}
-		system(("subfinder -silent -d " + domain +  " > .tmp_domains").c_str());
-		file.open(".tmp_domains", std::ios::in);
+		if (system(("subfinder -silent -d " + domain +  " > " + tmpfile).c_str()))
+			return (system(("rm -rf " + tmpfile).c_str()), 1);
+		file.open(tmpfile, std::ios::in);
 		if (file.is_open())
 		{
 			std::string subdomain;
 			std::ofstream writeFile;
 			writeFile.open("domains_result.txt", std::ios::out | std::ios::trunc);
-			while(std::getline(file, subdomain))
+			if (writeFile.is_open())
 			{
-				int sys_ret = system(("ping -w" + std::to_string(timeout_time) +" -c1 -s1 " + subdomain + "  > /dev/null 2>&1").c_str());
-				if (sys_ret == 0)
-				{    
-					writeFile << subdomain << std::endl;
-					std::cout << GREEN << subdomain << std::endl;
+				while(std::getline(file, subdomain))
+				{
+					int sys_ret = system(("ping -w" + std::to_string(timeout_time) +" -c1 -s1 " + subdomain + "  > /dev/null 2>&1").c_str());
+					if (sys_ret == 0)
+					{    
+						writeFile << subdomain << std::endl;
+						std::cout << GREEN << subdomain << std::endl;
+					}
+					else
+						std::cout << RED << subdomain << std::endl;
 				}
-				else
-					std::cout << RED << subdomain << std::endl;
+				std::cout << RESET;
+				system(("rm -rf " + tmpfile).c_str());
 			}
-			std::cout << RESET;
-			system("rm -rf .tmp_domains");
+			else
+		    	return(std::cout << RED << "Error while opening file" << std::endl,1);
 		}
 		else
 		    return(std::cout << RED << "Error while opening file" << std::endl,1);
