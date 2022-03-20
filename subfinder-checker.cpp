@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
 	{
 		int timeout_time = timeout_define(argv);
 		if (!timeout_time)
-			return(std::cout << RED << "Error: Invalide timeout value" << std::endl, 1);
+			return(std::cout << RED << "Error: Invalid timeout value" << std::endl, 1);
 		std::string domain = domain_define(argv);
 		std::string tmpfile = "." + RandomString(10);
 		if (domain == "NULL" || domain.find(".") == std::string::npos)	
