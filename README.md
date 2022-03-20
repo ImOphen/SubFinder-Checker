@@ -13,7 +13,7 @@
 This is a tool i made using C++, for learning purposes only, it relies on the **subfinder** tool to get a list of subdomains, and tries to ping them one by one, you will find the working subdomains in a file named **domains_result.txt**
 use -h to display the help message
 
-``usage :``
+``compilation :``
 ```git clone https://github.com/ImOphen/Subdomain-Finder-Checker
 c++ subfinder-checker.cpp -o subfinder-checker 
 ```
