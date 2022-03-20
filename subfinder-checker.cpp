@@ -51,6 +51,9 @@ void help_command(char *argv[])
 			std::cout << "		Display this help message" << std::endl << std::endl;
 			std::cout << "	-s:" << std::endl;
 			std::cout << "		Silent : doenst display the header message" << std::endl << std::endl;
+			std::cout << "	-ss:" << std::endl;
+			std::cout << "		Super Silent : doenst display the header message" << std::endl << std::endl;
+			std::cout << "			and the output" << std::endl << std::endl;
 			exit(0);
 		}
 		i++;	
@@ -63,7 +66,7 @@ void header(char *argv[])
 	while (argv[i])
 	{
 		std::string argvi = argv[i];
-		if (argvi == "-s")
+		if (argvi == "-s" || argvi == "-ss")
 			return;
 		i++;
 	}
@@ -87,11 +90,26 @@ std::string RandomString(int len)
 	}
 	return newstr;
 }
+
+int supersilent(char *argv[])
+{
+	int i = 0;
+	while (argv[i])
+	{
+		std::string argvi = argv[i];
+		if (argvi == "-ss")
+			return 1;
+		i++;
+	}
+	return 0;
+}
+
 int main(int argc, char *argv[])
 {
 	header(argv);
 	help_command(argv);
 	std::fstream file;
+	int super_silent = supersilent(argv);
 	if (argc >= 2)
 	{
 		int timeout_time = timeout_define(argv);
@@ -117,10 +135,12 @@ int main(int argc, char *argv[])
 					if (sys_ret == 0)
 					{    
 						writeFile << subdomain << std::endl;
-						std::cout << GREEN << subdomain << std::endl;
+						if (!super_silent)
+							std::cout << GREEN << subdomain << std::endl;
 					}
 					else
-						std::cout << RED << subdomain << std::endl;
+						if (!super_silent)
+							std::cout << RED << subdomain << std::endl;
 				}
 				std::cout << RESET;
 				system(("rm -rf " + tmpfile).c_str());
