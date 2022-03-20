@@ -49,7 +49,7 @@ void help_command(char *argv[])
 			std::cout << "		Specify a timeout for the checks | Default : 5" << std::endl;
 			std::cout << "	-o output :" << std::endl;
 			std::cout << "		Specify in which file the program will output" << std::endl;
-			std::cout << "		default : donmins_result.txt" << std::endl << std::endl;
+			std::cout << "		default : domains_result.txt" << std::endl;
 			std::cout << "	-h:" << std::endl;
 			std::cout << "		Display this help message" << std::endl;
 			std::cout << "	-s:" << std::endl;
