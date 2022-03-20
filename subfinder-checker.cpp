@@ -84,13 +84,12 @@ int main(int argc, char *argv[])
 	if (argc >= 2)
 	{
 		int timeout_time = timeout_define(argv);
+		if (!timeout_time)
+			return(std::cout << RED << "Error: Invalide timeout value" << std::endl, 1);
 		std::string domain = domain_define(argv);
 		std::string tmpfile = "." + RandomString(10);
-		if (domain == "NULL" || domain.find(".") == std::string::npos)
-		{	
-			std::cout << RED << "Error: NO DOMAIN" << std::endl;
-			return 1;
-		}
+		if (domain == "NULL" || domain.find(".") == std::string::npos)	
+			return(std::cout << RED << "Error: NO DOMAIN" << std::endl, 1);
 		if (system(("subfinder -silent -d " + domain +  " > " + tmpfile).c_str()))
 			return (system(("rm -rf " + tmpfile).c_str()), 1);
 		file.open(tmpfile, std::ios::in);
