@@ -16,7 +16,6 @@ use -h to display the help message
 ``usage :``
 ```git clone https://github.com/ImOphen/Subdomain-Finder-Checker
 c++ subfinder-checker.cpp -o subfinder-checker 
-./subfinder-checker -d DOMAIN.EXAMPLE -t TIME_OUT
 ```
 Help Message :
 ![image](https://user-images.githubusercontent.com/43254081/159156936-e44f031b-5ea8-4ef1-adf7-b890e7be2faa.png)
