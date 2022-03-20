@@ -47,6 +47,9 @@ void help_command(char *argv[])
 			std::cout << "		Domain to find subdomains for" << std::endl;
 			std::cout << "	-t seconds :" << std::endl;
 			std::cout << "		Specify a timeout for the checks | Default : 5" << std::endl;
+			std::cout << "	-o output :" << std::endl;
+			std::cout << "		Specify in which file the program will output" << std::endl;
+			std::cout << "		default : donmins_result.txt" << std::endl << std::endl;
 			std::cout << "	-h:" << std::endl;
 			std::cout << "		Display this help message" << std::endl;
 			std::cout << "	-s:" << std::endl;
@@ -104,12 +107,26 @@ int supersilent(char *argv[])
 	return 0;
 }
 
+std::string outputfile_finder(char *argv[])
+{
+	int i = 0;
+	while (argv[i])
+	{
+		std::string argvi = argv[i];
+		if (argvi == "-o" && argv[i + 1])
+			return (argv[i + 1]);
+		i++;	
+	}
+	return "domains_result.txt";
+}
+
 int main(int argc, char *argv[])
 {
 	header(argv);
 	help_command(argv);
 	std::fstream file;
 	int super_silent = supersilent(argv);
+	std::string outputfile = outputfile_finder(argv);
 	if (argc >= 2)
 	{
 		int timeout_time = timeout_define(argv);
@@ -126,7 +143,7 @@ int main(int argc, char *argv[])
 		{
 			std::string subdomain;
 			std::ofstream writeFile;
-			writeFile.open("domains_result.txt", std::ios::out | std::ios::trunc);
+			writeFile.open(outputfile, std::ios::out | std::ios::trunc);
 			if (writeFile.is_open())
 			{
 				while(std::getline(file, subdomain))
@@ -152,6 +169,6 @@ int main(int argc, char *argv[])
 		    return(std::cout << RED << "Error while opening file" << std::endl,1);
 		}
 	else 
-	    return(std::cout << RED << "Error :: Arguments" << std::endl,1);
+	    return(std::cout << RED << "Error : Arguments" << std::endl,1);
 	return 0;
 }
