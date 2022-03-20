@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
 				system(("rm -rf " + tmpfile).c_str());
 			}
 			else
-		    	return(std::cout << RED << "Error while opening file" << std::endl,1);
+		    		return(std::cout << RED << "Error while opening file" << std::endl,1);
 		}
 		else
 		    return(std::cout << RED << "Error while opening file" << std::endl,1);
