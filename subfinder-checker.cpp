@@ -10,7 +10,6 @@
 int timeout_define(char *argv[])
 {
 	int i = 0;
-	int count = 0;
 	while (argv[i])
 	{
 		std::string argvi = argv[i];
@@ -27,7 +26,7 @@ std::string domain_define(char *argv[])
 	while (argv[i])
 	{
 		std::string argvi = argv[i];
-		if (argvi == "-d" && argv[i + 1])
+		if ((argvi == "-d" || argvi == "-dl") && argv[i + 1])
 			return (argv[i + 1]);
 		i++;	
 	}
@@ -45,6 +44,8 @@ void help_command(char *argv[])
 			std::cout << "Usage of subfinder-checker : " << std::endl << std::endl;
 			std::cout << "	-d domain :" << std::endl;
 			std::cout << "		Domain to find subdomains for" << std::endl;
+			std::cout << "	-dl file :" << std::endl;
+			std::cout << "		File containing list of domains to enumerate and check" << std::endl;
 			std::cout << "	-t seconds :" << std::endl;
 			std::cout << "		Specify a timeout for the checks | Default : 5" << std::endl;
 			std::cout << "	-o output :" << std::endl;
@@ -80,7 +81,7 @@ void header(char *argv[])
 	std::cout << std::endl << BLUE << "-   Made by Ophen :D    <|>   use -h to display the Help Message" << std::endl << std::endl << RESET;
 }
 
-std::string RandomString(int len)
+std::string RandomString(std::size_t len)
 {
 	srand(time(0));
 	std::string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -120,6 +121,19 @@ std::string outputfile_finder(char *argv[])
 	return "domains_result.txt";
 }
 
+int dl(char *argv[])
+{
+	int i = 0;
+	while (argv[i])
+	{
+		std::string argvi = argv[i];
+		if (argvi == "-dl" && argv[i + 1])
+			return 1;
+		i++;	
+	}
+	return 0;
+}
+
 int main(int argc, char *argv[])
 {
 	header(argv);
@@ -134,9 +148,10 @@ int main(int argc, char *argv[])
 			return(std::cout << RED << "Error: Invalid timeout value" << std::endl, 1);
 		std::string domain = domain_define(argv);
 		std::string tmpfile = "." + RandomString(10);
-		if (domain == "NULL" || domain.find(".") == std::string::npos)	
+		if (domain == "NULL")	
 			return(std::cout << RED << "Error: NO DOMAIN" << std::endl, 1);
-		if (system(("subfinder -silent -d " + domain +  " > " + tmpfile).c_str()))
+		if ((dl(argv) && system(("subfinder -silent -dL " + domain +  " > " + tmpfile).c_str()))
+			|| (!dl(argv) && system(("subfinder -silent -d " + domain +  " > " + tmpfile).c_str())))
 			return (system(("rm -rf " + tmpfile).c_str()), 1);
 		file.open(tmpfile, std::ios::in);
 		if (file.is_open())
