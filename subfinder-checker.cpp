@@ -45,8 +45,8 @@ void help_command(char *argv[])
 			std::cout << "Usage of subfinder-checker : " << std::endl << std::endl;
 			std::cout << "	-d domain :" << std::endl;
 			std::cout << "		Domain to find subdomains for" << std::endl;
-			std::cout << "	-t time :" << std::endl;
-			std::cout << "		Specify a timeout for the checks in seconds" << std::endl;
+			std::cout << "	-t seconds :" << std::endl;
+			std::cout << "		Specify a timeout for the checks | Default : 5" << std::endl;
 			std::cout << "	-h:" << std::endl;
 			std::cout << "		Display this help message" << std::endl << std::endl;
 			exit(0);
