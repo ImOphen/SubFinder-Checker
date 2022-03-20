@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <thread>
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"      /* Red */
@@ -134,6 +135,20 @@ int dl(char *argv[])
 	return 0;
 }
 
+void run_checks(int &timeout_time, std::string &subdomain, std::ofstream &writeFile, int &super_silent)
+{
+	int sys_ret = system(("ping -w" + std::to_string(timeout_time) +" -c1 -s1 " + subdomain + "  > /dev/null 2>&1").c_str());
+	if (sys_ret == 0)
+	{    
+		writeFile << subdomain << std::endl;
+		if (!super_silent)
+			std::cout << GREEN << subdomain << std::endl;
+	}
+	else
+		if (!super_silent)
+			std::cout << RED << subdomain << std::endl;
+}
+
 int main(int argc, char *argv[])
 {
 	header(argv);
@@ -162,18 +177,7 @@ int main(int argc, char *argv[])
 			if (writeFile.is_open())
 			{
 				while(std::getline(file, subdomain))
-				{
-					int sys_ret = system(("ping -w" + std::to_string(timeout_time) +" -c1 -s1 " + subdomain + "  > /dev/null 2>&1").c_str());
-					if (sys_ret == 0)
-					{    
-						writeFile << subdomain << std::endl;
-						if (!super_silent)
-							std::cout << GREEN << subdomain << std::endl;
-					}
-					else
-						if (!super_silent)
-							std::cout << RED << subdomain << std::endl;
-				}
+					run_checks(timeout_time, subdomain, writeFile, super_silent);
 				std::cout << RESET;
 				system(("rm -rf " + tmpfile).c_str());
 			}
