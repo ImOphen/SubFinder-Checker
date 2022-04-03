@@ -18,11 +18,10 @@ use -h to display the help message
 c++ subfinder-checker.cpp -o subfinder-checker 
 ```
 ``Usage :``  
-Help Message :
-![image](https://user-images.githubusercontent.com/43254081/159159827-f6095fcf-afb3-4e36-b843-521356a72eda.png)
-Command Example :
-![image](https://user-images.githubusercontent.com/43254081/159158959-4f83f665-83d2-4b2a-b95e-fe827ef01ab1.png)
-Command Example with silent mode and using the default timeout:
-![image](https://user-images.githubusercontent.com/43254081/159156986-7b427f1a-4823-4edd-97c0-86ce0ec3e4dc.png)
-domains_result.txt file:
-![image](https://user-images.githubusercontent.com/43254081/159156458-486ed425-7504-4ec3-88bd-def511513457.png)
+Help Message :  
+<img width="885" alt="image" src="https://user-images.githubusercontent.com/43254081/161425513-cd0cd3ed-3f8a-46f1-8795-7da3b9196cc0.png">  
+Command Example :  
+<img width="883" alt="image" src="https://user-images.githubusercontent.com/43254081/161425485-96724a07-59e0-40c6-8280-71364cb9b9ae.png">  
+domains_result.txt file:  
+<img width="880" alt="image" src="https://user-images.githubusercontent.com/43254081/161425548-f8bf6258-77b6-4893-88ad-4a122ef38ea1.png">  
+
