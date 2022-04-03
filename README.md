@@ -1,4 +1,4 @@
-# Subdomain-Finder-Checker
+# SubFinder-Checker
 
 
 ### Prerequisites
